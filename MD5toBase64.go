@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 )
+
 var input string
 
 func main() {
@@ -19,27 +20,29 @@ func main() {
 	h := md5.New()
 	io.WriteString(h, input)
 	fmt.Printf("%x", h.Sum(nil))
+	hash := h.Sum(nil)
 
 	fmt.Println()
 	fmt.Println()
 
-	fmt.Println("converted to byte")
-	fmt.Println([]byte(h.Sum(nil)))
+	fmt.Println("MD5 hash to byte")
+	byteString := []byte(hash)
+	fmt.Println(byteString)
 
 	fmt.Println()
+	fmt.Println()
 
-	fmt.Println("converted to slice byte")
-	hash := []byte(h.Sum(nil))
-
-	for i := 0; i < len(hash); i++ {
-		fmt.Printf("%x ", hash[i])
+	fmt.Println("looping through byte")
+	//for i := 0; i < len(byteString); i++ {
+	for i := range byteString {
+		fmt.Printf("%x ", byteString[i])
 	}
 
 	fmt.Println()
 	fmt.Println()
 
 	fmt.Println("base64 Encoding...")
-	str := base64.StdEncoding.EncodeToString([]byte(hash))
+	str := base64.StdEncoding.EncodeToString([]byte(byteString))
 	fmt.Println(str)
 
 	fmt.Println()
@@ -51,5 +54,4 @@ func main() {
 	}
 
 	fmt.Printf("%q\n", data)
-
 }
